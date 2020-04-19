@@ -7,8 +7,10 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {TouchableHighlight} from 'react-native-gesture-handler';
 
-const Home = () => {
+const Home = ({navigation}: {navigation: StackNavigationProp<any>}) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -17,12 +19,15 @@ const Home = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
           <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>text dreams</Text>
-              <Text style={styles.sectionDescription}>
-                write your <Text style={styles.highlight}>text</Text> here.
-              </Text>
-            </View>
+            <TouchableHighlight
+              onPress={() => navigation.navigate('TextEntry')}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>text dreams</Text>
+                <Text style={styles.sectionDescription}>
+                  write your <Text style={styles.highlight}>text</Text> here.
+                </Text>
+              </View>
+            </TouchableHighlight>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>audio dreams</Text>
               <Text style={styles.sectionDescription}>

@@ -14,6 +14,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from './components/Home';
 import Login from './components/Login';
+import TextEntry from './components/TextEntry';
 
 const Stack = createStackNavigator();
 function App() {
@@ -29,6 +30,11 @@ function App() {
           name="Home"
           component={Home}
           options={{title: 'dream entry'}}
+        />
+        <Stack.Screen
+          name="TextEntry"
+          component={TextEntry}
+          options={{title: 'text entry'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
