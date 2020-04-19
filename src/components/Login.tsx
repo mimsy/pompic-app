@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {View, TextInput, Button} from 'react-native';
+import {View, TextInput, Button, Alert} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Auth} from 'aws-amplify';
 
 export default function Login({
   navigation,
@@ -14,10 +15,18 @@ export default function Login({
     return email.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event: any): void {
+  async function handleSubmit(event: any): Promise<void> {
     event.preventDefault();
-    validateForm();
-    navigation.navigate('Home');
+    try {
+      if (!validateForm()) {
+        throw new Error('Missing email or password');
+      }
+
+      await Auth.signIn(email, password);
+      navigation.replace('Home');
+    } catch (e) {
+      Alert.alert(e.message);
+    }
   }
 
   return (

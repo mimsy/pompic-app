@@ -3,7 +3,7 @@
  */
 import {Amplify} from 'aws-amplify';
 import config from './src/config';
-
+window.LOG_LEVEL = 'DEBUG';
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
