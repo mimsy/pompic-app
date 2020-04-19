@@ -1,7 +1,6 @@
 /**
  * @format
  */
-
 import {Amplify} from 'aws-amplify';
 import config from './src/config';
 
