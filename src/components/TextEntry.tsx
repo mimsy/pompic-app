@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  Text,
-  StatusBar,
-  TextInput,
-  Button,
-} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView, StatusBar, TextInput, Button, Alert} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Storage} from 'aws-amplify';
 
 const TextEntry = ({navigation}: {navigation: StackNavigationProp<any>}) => {
   const [content, setContent] = useState('');
@@ -17,8 +10,10 @@ const TextEntry = ({navigation}: {navigation: StackNavigationProp<any>}) => {
     return content.length > 0;
   }
 
-  function saveDream() {
+  async function saveDream() {
     validateForm();
+    const date = new Date().toISOString();
+    await Storage.vault.put(`${date}.dream.txt`, content);
     navigation.navigate('Home');
   }
 
